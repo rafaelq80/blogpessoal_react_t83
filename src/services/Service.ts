@@ -2,8 +2,8 @@ import axios from "axios";
 
 // Instância do Axios
 const api = axios.create({
-    //baseURL: 'https://blogpessoal-spring-t83-cwdc.onrender.com'
-    baseURL: 'https://blogpessoal-security.onrender.com'
+    baseURL: 'https://blogpessoal-spring-t83-cwdc.onrender.com'
+    //baseURL: 'https://blogpessoal-security.onrender.com'
 })
 
 // Função para Cadastrar Usuário
