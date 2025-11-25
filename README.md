@@ -132,7 +132,7 @@ src/
 ├── models/           → Interfaces e tipos do projeto
 ├── pages/            → Páginas da aplicação
 ├── services/         → Configuração do Axios
-├── utils/            → Funções auxiliares (alerts)
+├── utils/            → Funções auxiliares (ToastAlertas)
 ├── App.css           → Estilos do Componente raiz
 ├── App.tsx           → Componente raiz
 ├── main.tsx          → Entrada da aplicação
