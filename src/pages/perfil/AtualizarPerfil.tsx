@@ -12,10 +12,10 @@ function AtualizarPerfil() {
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	
-    const [user, setUser] = useState<Usuario>({} as Usuario)
-    const [confirmarSenha, setConfirmarSenha] = useState<string>("")
+	const [user, setUser] = useState<Usuario>({} as Usuario)
+	const [confirmarSenha, setConfirmarSenha] = useState<string>("")
 	
-    const { usuario, handleLogout } = useContext(AuthContext)
+	const { usuario, handleLogout } = useContext(AuthContext)
 	const token = usuario.token
 	const id: string = usuario.id.toString()
 
@@ -47,7 +47,6 @@ function AtualizarPerfil() {
 		}
 	}, [token])
 
-	// Reset
 	useEffect(() => {
 		setUser({} as Usuario)
 		setConfirmarSenha("")
@@ -110,91 +109,88 @@ function AtualizarPerfil() {
 	}
 
 	return (
-		<div className="min-h-screen bg-linear-to-br from-sky-50 to-indigo-100 py-12 px-4">
+		<div className="min-h-screen bg-gray-50 py-12 px-4">
 			<div className="container mx-auto max-w-7xl">
-				<div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+				<div className="bg-white rounded-lg shadow-lg overflow-hidden">
 					<div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr]">
 						{/* Seção da foto */}
-						<div className="bg-linear-to-br from-sky-400 via-sky-500 to-indigo-500 p-8 flex flex-col items-center justify-center">
+						<div className="bg-indigo-500 p-8 flex flex-col items-center justify-center">
 							<div className="relative">
 								<img
 									src={user.foto}
 									alt={user.nome}
-									className="w-48 h-48 object-cover rounded-full border-8 border-white shadow-2xl"
+									className="w-48 h-48 object-cover rounded-full border-4 border-white shadow-lg"
 								/>
-								<div className="absolute bottom-4 right-4 w-8 h-8 bg-green-500 rounded-full border-4 border-white"></div>
 							</div>
 							<h2 className="text-white text-2xl font-bold mt-6 text-center">{user.nome}</h2>
-							<p className="text-sky-100 text-base mt-2">{user.usuario}</p>
+							<p className="text-indigo-100 text-base mt-2">{user.usuario}</p>
 						</div>
 
 						{/* Seção do formulário */}
 						<div className="p-8 lg:p-12">
-							<div className="mb-8">
-								<h1 className="text-4xl font-bold text-gray-800 mb-2">Editar Perfil</h1>
-								<p className="text-gray-500">Atualize suas informações pessoais</p>
-							</div>
+							<h1 className="text-4xl text-center my-2">
+								Editar Perfil
+							</h1>
 
-							<form onSubmit={atualizarUsuario} className="space-y-6">
-								<div className="space-y-2">
-									<label htmlFor="nome" className="block text-sm font-semibold text-gray-700">
-										Nome Completo
+							<form onSubmit={atualizarUsuario} className="space-y-4">
+								<div className="flex flex-col">
+									<label htmlFor="nome" className="font-bold mb-1">
+										Nome
 									</label>
 									<input
 										type="text"
 										id="nome"
 										name="nome"
-										placeholder="Digite seu nome completo"
-										className="w-full px-4 py-3 border-2 border-slate-700 rounded  focus:outline-none transition-colors"
+										placeholder="Nome"
+										className="px-4 py-2 border-2 border-slate-700 rounded focus:outline-none"
 										value={user.nome || ""}
 										onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
 										required
 									/>
 								</div>
 
-								<div className="space-y-2">
-									<label htmlFor="usuario" className="block text-sm font-semibold text-gray-700">
-										E-mail
+								<div className="flex flex-col">
+									<label htmlFor="usuario" className="font-bold mb-1">
+										Usuario
 									</label>
 									<input
 										type="email"
 										id="usuario"
 										name="usuario"
-										placeholder="seu@email.com"
-										className="w-full px-4 py-3 border-2 border-gray-200 rounded bg-gray-50 cursor-not-allowed"
+										placeholder="Usuario"
+										className="px-4 py-2 border-2 border-slate-700 rounded bg-gray-100 cursor-not-allowed"
 										disabled
 										value={user.usuario || ""}
 										onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
 									/>
-									<p className="text-xs text-gray-500">O e-mail não pode ser alterado</p>
 								</div>
 
-								<div className="space-y-2">
-									<label htmlFor="foto" className="block text-sm font-semibold text-gray-700">
-										URL da Foto de Perfil
+								<div className="flex flex-col">
+									<label htmlFor="foto" className="font-bold mb-1">
+										Foto
 									</label>
 									<input
 										type="url"
 										id="foto"
 										name="foto"
-										placeholder="https://exemplo.com/foto.jpg"
-										className="w-full px-4 py-3 border-2 border-slate-700 rounded  focus:outline-none transition-colors"
+										placeholder="Foto"
+										className="px-4 py-2 border-2 border-slate-700 rounded focus:outline-none"
 										value={user.foto || ""}
 										onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
 										required
 									/>
 								</div>
 
-								<div className="space-y-2">
-									<label htmlFor="senha" className="block text-sm font-semibold text-gray-700">
-										Nova Senha
+								<div className="flex flex-col">
+									<label htmlFor="senha" className="font-bold mb-1">
+										Senha
 									</label>
 									<input
 										type="password"
 										id="senha"
 										name="senha"
-										placeholder="Mínimo 8 caracteres"
-										className="w-full px-4 py-3 border-2 border-slate-700 rounded  focus:outline-none transition-colors"
+										placeholder="Senha"
+										className="px-4 py-2 border-2 border-slate-700 rounded focus:outline-none"
 										value={user.senha || ""}
 										onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
 										required
@@ -202,16 +198,16 @@ function AtualizarPerfil() {
 									/>
 								</div>
 
-								<div className="space-y-2">
-									<label htmlFor="confirmarSenha" className="block text-sm font-semibold text-gray-700">
-										Confirmar Nova Senha
+								<div className="flex flex-col">
+									<label htmlFor="confirmarSenha" className="font-bold mb-1">
+										Confirmar Senha
 									</label>
 									<input
 										type="password"
 										id="confirmarSenha"
 										name="confirmarSenha"
-										placeholder="Digite a senha novamente"
-										className="w-full px-4 py-3 border-2 border-slate-700 rounded  focus:outline-none transition-colors"
+										placeholder="Confirmar Senha"
+										className="px-4 py-2 border-2 border-slate-700 rounded focus:outline-none"
 										value={confirmarSenha}
 										onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
 										required
@@ -219,25 +215,25 @@ function AtualizarPerfil() {
 									/>
 								</div>
 
-								<div className="flex flex-col sm:flex-row gap-4 pt-4">
+								<div className="flex justify-around gap-8 pt-4">
 									<button
 										type="button"
-										className="flex-1 px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors"
+										className="rounded text-white bg-red-400 hover:bg-red-700 w-1/2 py-2 font-bold"
 										onClick={retornar}
 									>
 										Cancelar
 									</button>
+
 									<button
 										type="submit"
-										className="flex-1 px-6 py-3 bg-linear-to-r from-indigo-600 to-indigo-700 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-indigo-800 shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+										className="rounded text-white bg-indigo-400 hover:bg-indigo-900 
+												   w-1/2 py-2 flex justify-center font-bold"
 										disabled={isLoading}
 									>
 										{isLoading ? (
 											<ClipLoader color="#ffffff" size={24} />
 										) : (
-											<>
-												<span>Atualizar Perfil</span>
-											</>
+											<span>Atualizar</span>
 										)}
 									</button>
 								</div>
